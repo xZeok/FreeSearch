@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct ItemDetailView: View {
+    
+    // MARK: - Properties.
+    
     var item: Item
+    
+    // MARK: - Body.
+    
     var body: some View {
         VStack(spacing: 16) {
             Spacer()
@@ -19,22 +25,22 @@ struct ItemDetailView: View {
             Text(item.title)
                 .font(.title2)
                 .fontWeight(.semibold)
-                .lineLimit(2)
+                .lineLimit(3)
                 .minimumScaleFactor(0.5)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             HStack(spacing: 40) {
-                Label("\(item.price)", systemImage: "dollarsign.circle.fill")
+                Label(Constants.formatter.string(from: NSNumber(value: item.price)) ?? .empty, systemImage: ItemDetailViewConstants.priceImageName)
                     .font(.headline)
-                    .foregroundColor(.secondary)
-                Label("\(item.availableQuantity) disponibles", systemImage: "bag.circle.fill")
+                    .foregroundColor(.green)
+                Label("\(item.availableQuantity) \(ItemDetailViewConstants.available)", systemImage: ItemDetailViewConstants.amountImageName)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
             Link(destination: item.permalink) {
-                Text("Comprar")
+                Text(ItemDetailViewConstants.buttonText)
                     .bold()
-                    .font(.title2)
+                    .font(.title3)
                     .frame(width: 280, height: 50)
                     .background(Color(.systemRed))
                     .foregroundColor(.white)
@@ -45,6 +51,8 @@ struct ItemDetailView: View {
         }
     }
 }
+
+// MARK: - Preview.
 
 struct ItemDetailView_Previews: PreviewProvider {
     static var previews: some View {

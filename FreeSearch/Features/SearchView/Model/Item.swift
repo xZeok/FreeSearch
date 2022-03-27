@@ -12,7 +12,6 @@ struct Item: Identifiable, Codable {
     let title: String
     let price: Double
     let availableQuantity: Int
-    let currencyId: String
     let permalink: URL
     let thumbnail: String
 }

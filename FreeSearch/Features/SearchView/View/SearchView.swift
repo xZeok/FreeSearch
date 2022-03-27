@@ -9,8 +9,12 @@ import SwiftUI
 
 struct SearchView: View {
     
+    // MARK: - Properties.
+    
     @StateObject private var viewModel = SearchViewModel()
-    @State private var searchTerm = ""
+    @State private var searchTerm: String = .empty
+    
+    // MARK: - Body.
     
     var body: some View {
         NavigationView {
@@ -18,12 +22,13 @@ struct SearchView: View {
                 List(viewModel.items, id: \.id) { item in
                     NavigationLink(destination: ItemDetailView(item: item)) {
                         ItemCellView(item: item)
+                            .listRowSeparator(.hidden)
                     }
                 }
                 if viewModel.items.isEmpty { DescriptionView() }
                 if viewModel.isLoading { LoadingView() }
             }
-            .navigationTitle("Búsqueda Libre")
+            .navigationTitle(SearchViewConstants.title)
         }
         .searchable(text: $searchTerm)
         .onChange(of: searchTerm, perform: { newValue in
@@ -34,6 +39,8 @@ struct SearchView: View {
         }
     }
 }
+
+// MARK: - Preview.
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

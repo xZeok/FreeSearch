@@ -9,9 +9,13 @@ import Foundation
 
 final class SearchViewModel: ObservableObject {
     
+    // MARK: - Properties.
+    
     @Published var items: [Item] = []
     @Published var isLoading = false
     @Published var alertItem: AlertItem?
+    
+    // MARK: - Search.
     
     func search(query: String){
         guard !query.isEmpty else{

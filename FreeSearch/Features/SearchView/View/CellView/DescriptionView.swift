@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct DescriptionView: View {
+    
+    // MARK: - Body.
+    
     var body: some View {
         VStack(spacing: 6) {
-            Image(systemName: "magnifyingglass")
+            Image(systemName: SearchViewConstants.DescriptionView.imageName)
                 .font(.system(size: 60))
-            Text ("Haz tu búsqueda")
+            Text (SearchViewConstants.DescriptionView.descriptionTitle)
                 .font(.title.weight(.bold))
-            Text( "Comienza escribiendo en la barra de navegación lo que deseas buscar.")
+            Text(SearchViewConstants.DescriptionView.description)
                 .multilineTextAlignment(.center)
         }
         .padding()
@@ -22,6 +25,8 @@ struct DescriptionView: View {
         .foregroundColor(.gray)
     }
 }
+
+// MARK: - Preview.
 
 struct DescriptionCellView_Previews: PreviewProvider {
     static var previews: some View {

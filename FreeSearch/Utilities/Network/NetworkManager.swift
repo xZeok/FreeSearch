@@ -9,8 +9,12 @@ import UIKit
 
 class NetworkManager: NSObject {
     
-    static let shared           = NetworkManager()
-    private let cache           = NSCache<NSString, UIImage>()
+    // MARK: - Properties.
+    
+    static let shared = NetworkManager()
+    private let cache = NSCache<NSString, UIImage>()
+    private var currentTask: URLSessionDataTask?
+    private var canceledTask = false
     
     private override init() {}
     
@@ -45,9 +49,14 @@ class NetworkManager: NSObject {
         urlRequest.httpMethod = router.method.rawValue
         urlRequest.setValue("application/json", forHTTPHeaderField: "content-type")
 
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        currentTask?.cancel()
+        canceledTask = true
+        currentTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let _ =  error {
-                completion(.failure(.unableToComplete))
+                if !self.canceledTask {
+                    completion(.failure(.unableToComplete))
+                }
+                self.canceledTask = false
                 return
             }
                         
@@ -70,7 +79,7 @@ class NetworkManager: NSObject {
                 completion(.failure(.invalidData))
             }
         }
-        task.resume()
+        currentTask?.resume()
     }
     
     // MARK: - Download Image.
