@@ -10,19 +10,27 @@ import SwiftUI
 struct SearchView: View {
     
     @StateObject private var viewModel = SearchViewModel()
+    @State private var searchTerm = ""
     
     var body: some View {
-        ZStack {
-            NavigationView {
+        NavigationView {
+            ZStack {
                 List(viewModel.items, id: \.id) { item in
                     NavigationLink(destination: ItemDetailView(item: item)) {
-                        ItemCell(item: item)
+                        ItemCellView(item: item)
                     }
                 }
-                .navigationTitle("Búsqueda Libre")
+                if viewModel.items.isEmpty { DescriptionView() }
+                if viewModel.isLoading { LoadingView() }
             }
-            .onAppear() { viewModel.search(query: "Nintendo Switch")}
-            //if viewModel.isLoading { LoadingView() }
+            .navigationTitle("Búsqueda Libre")
+        }
+        .searchable(text: $searchTerm)
+        .onChange(of: searchTerm, perform: { newValue in
+            viewModel.search(query: newValue)
+        })
+        .alert(item: $viewModel.alertItem) { alertItem in
+            Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
         }
     }
 }

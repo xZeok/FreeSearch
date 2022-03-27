@@ -9,8 +9,6 @@ enum ServiceRouter {
     
     enum Constants {
         static let baseURL = "https://api.mercadolibre.com/"
-        //static let timeoutIntervalTime = 30 * 1000
-        //static let authenticationToken = "Basic xxx"
     }
     
     public typealias Parameters = [String: Any]

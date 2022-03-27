@@ -14,7 +14,7 @@ struct ItemDetailView: View {
             Spacer()
             ItemRemoteImage(urlString: item.thumbnail)
                 .scaledToFit()
-                .frame(height: 150)
+                .frame(width: 150, height: 150)
                 .cornerRadius(12)
             Text(item.title)
                 .font(.title2)
@@ -25,7 +25,7 @@ struct ItemDetailView: View {
                 .padding(.horizontal)
             HStack(spacing: 40) {
                 Label("\(item.price)", systemImage: "dollarsign.circle.fill")
-                    .font(.subheadline)
+                    .font(.headline)
                     .foregroundColor(.secondary)
                 Label("\(item.availableQuantity) disponibles", systemImage: "bag.circle.fill")
                     .font(.subheadline)
@@ -48,6 +48,6 @@ struct ItemDetailView: View {
 
 struct ItemDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemDetailView(item: MockData.sampleItem)
+        ItemDetailView(item: Item.mock())
     }
 }

@@ -14,7 +14,6 @@ class NetworkManager: NSObject {
     
     private override init() {}
     
-    
     // MARK: - Request.
     
     func request<T: Codable>(_ router: ServiceRouter, type: T.Type, completion: @escaping (Result<T, FSError>) -> Void) {

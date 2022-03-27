@@ -1,5 +1,5 @@
 //
-//  ItemCell.swift
+//  ItemCellView.swift
 //  FreeSearch
 //
 //  Created by Jaime Capponi Zerene on 26-03-22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ItemCell: View {
+struct ItemCellView: View {
     
     let item: Item
     
@@ -16,7 +16,7 @@ struct ItemCell: View {
             ItemRemoteImage(urlString: item.thumbnail)
                 .scaledToFill()
                 .frame(width: 120, height: 90)
-                .cornerRadius(30)
+                .cornerRadius(8)
                 .padding(.vertical, 4)
             VStack(alignment: .leading, spacing: 5) {
                 Text(item.title)
@@ -32,10 +32,9 @@ struct ItemCell: View {
     }
 }
 
-
 struct AppetizerCell_Previews: PreviewProvider {
     static var previews: some View {
-        ItemCell(item: MockData.sampleItem)
+        ItemCellView(item: Item.mock())
     }
 }
 
