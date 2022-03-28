@@ -22,7 +22,6 @@ struct SearchView: View {
                 List(viewModel.items, id: \.id) { item in
                     NavigationLink(destination: ItemDetailView(item: item)) {
                         ItemCellView(item: item)
-                            .listRowSeparator(.hidden)
                     }
                 }
                 if viewModel.items.isEmpty { DescriptionView() }
@@ -31,6 +30,7 @@ struct SearchView: View {
             .navigationTitle(SearchViewConstants.title)
         }
         .searchable(text: $searchTerm)
+        .disableAutocorrection(true)
         .onChange(of: searchTerm, perform: { newValue in
             viewModel.search(query: newValue)
         })

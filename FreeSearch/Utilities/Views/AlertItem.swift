@@ -21,6 +21,10 @@ enum AlertContext {
                                             message: Text("Hay un error intentando lograr la conexión. Si esto continua, favort contactar a soporte al cliente."),
                                             dismissButton: .default(Text("Ok")))
     
+    static let invalidRequest       = AlertItem(title: Text("Error"),
+                                            message: Text("Hay un error intentando lograr la conexión. Si esto continua, favort contactar a soporte al cliente."),
+                                            dismissButton: .default(Text("Ok")))
+    
     static let unableToComplete = AlertItem(title: Text("Error de conexión"),
                                             message: Text("No se puede realizar la petición. Favor de revisar su conexión a internet."),
                                             dismissButton: .default(Text("Ok")))
